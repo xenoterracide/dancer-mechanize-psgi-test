@@ -1,7 +1,11 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-use Test::More;
+BEGIN {
+	use Test::More tests => 2;
+	use namespace::clean qw( pass );
+}
+use Test::NoWarnings;
 use FindBin;
 use Cwd qw( realpath );
 use Dancer qw( :syntax );
@@ -26,5 +30,3 @@ my $mech = Test::WWW::Mechanize::PSGI->new(
 );
 
 $mech->get_ok('/') or diag $mech->content;
-
-done_testing;
